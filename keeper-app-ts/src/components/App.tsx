@@ -4,18 +4,23 @@ import Note from './Note';
 import Header from './Header';
 import CreateArea from './CreateArea';
 
-function App() {
-	const [ notes, setNotes ] = useState([]);
+export interface Notes {
+	title: string,
+	content: string
+}
 
-	function addNote(newNote) {
-		setNotes((prevNotes) => {
+const App: React.FC = (): JSX.Element => {
+	const [ notes, setNotes ] = useState<Notes[]>([]);
+
+	function addNote(newNote: Notes): void{
+		setNotes((prevNotes): Notes[] => {
 			return [ ...prevNotes, newNote ];
 		});
 	}
 
-	function deleteNote(id) {
-		setNotes((prevNotes) => {
-			return prevNotes.filter((noteItem, index) => {
+	function deleteNote(id: number) {
+		setNotes((prevNotes: Notes[]): Notes[] => {
+			return prevNotes.filter((noteItem: Notes, index?:number) => {
 				return index !== id;
 			});
 		});
@@ -25,7 +30,7 @@ function App() {
 		<div>
 			<Header />
 			<CreateArea onAdd={addNote} />
-			{notes.map((noteItem, index) => {
+			{notes.map((noteItem: Notes, index: number) => {
 				return (
 					<Note
 						key={index}

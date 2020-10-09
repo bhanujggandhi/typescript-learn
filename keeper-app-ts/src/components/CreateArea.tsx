@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
+import {Notes} from './App'
 
+interface Props {
+	onAdd: (note: Notes) => void
+}
 
-function CreateArea(props) {
-	const [isExpanded, setExpanded] = useState(false)
-	const [ note, setNote ] = useState({
+function CreateArea(props: Props) {
+	const [isExpanded, setExpanded] = useState<boolean>(false)
+	const [ note, setNote ] = useState<Notes>({
 		title: '',
 		content: ''
 	});
 
-	function handleChange(event) {
+	function handleChange(event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>): void {
 		const { name, value } = event.target;
 
 		setNote((prevNote) => {
@@ -22,7 +26,7 @@ function CreateArea(props) {
 		});
 	}
 
-	function submitNote(event) {
+	function submitNote(event: React.FormEvent<HTMLButtonElement>): void {
 		props.onAdd(note);
 		setNote({
 			title: '',
@@ -31,7 +35,7 @@ function CreateArea(props) {
 		event.preventDefault();
 	}
 
-	function expand(){
+	function expand(): void{
 		setExpanded(true)
 	}
 

@@ -1,4 +1,10 @@
-const notes = [
+interface NotesType {
+	key: number,
+	title: string,
+	content: string
+}
+
+const notes: NotesType[] = [
 	{
 		key: 1,
 		title: 'Delegation',

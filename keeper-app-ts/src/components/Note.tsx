@@ -1,8 +1,17 @@
 import React from 'react';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-function Note(props) {
-	function handleClick() {
+
+interface Props {
+	title: string,
+	content: string,
+	onDelete: (id: number) => void,
+	id: number
+}
+
+const Note = (props: Props): JSX.Element => {
+	
+	function handleClick(): void {
 		props.onDelete(props.id);
 	}
 
@@ -13,6 +22,6 @@ function Note(props) {
 			<button onClick={handleClick}><DeleteForeverIcon /></button>
 		</div>
 	);
-}
+};
 
 export default Note;

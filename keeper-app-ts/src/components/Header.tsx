@@ -1,7 +1,7 @@
 import React from 'react';
 import EmojiObjectsOutlinedIcon from '@material-ui/icons/EmojiObjectsOutlined';
 
-function Header() {
+function Header(): JSX.Element {
 	return (
 		<header>
 			<h1>
