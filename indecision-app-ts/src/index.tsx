@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import Indecision from './components/Indecision';
+import 'normalize.css/normalize.css';
+import './styles/styles.scss'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Indecision />
   </React.StrictMode>,
   document.getElementById('root')
 );
