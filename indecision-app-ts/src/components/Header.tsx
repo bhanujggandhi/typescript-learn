@@ -1,6 +1,11 @@
 import React from 'react';
 
-const Header = (props) => (
+interface IProps {
+	title: string,
+	subtitle: string
+}
+
+const Header = (props: IProps): JSX.Element => (
 	<div className="header">
 		<div className="container">
 			<h1 className="header__title">{props.title}</h1>

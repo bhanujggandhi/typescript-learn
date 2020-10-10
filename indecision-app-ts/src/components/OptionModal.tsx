@@ -1,7 +1,12 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-const OptionModal = (props) => (
+interface IProps {
+	selectedOption?: string,
+	handleOkay: () => void
+}
+
+const OptionModal = (props: IProps): JSX.Element => (
 	<Modal
 		isOpen={!!props.selectedOption}
 		contentLabel="Selected Option"

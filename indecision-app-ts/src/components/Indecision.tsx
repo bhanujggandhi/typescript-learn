@@ -4,17 +4,23 @@ import Action from './Action';
 import Options from './Options';
 import AddOptions from './AddOption';
 import OptionModal from './OptionModal';
-// import { render } from '@testing-library/react';
+
+
+interface IState {
+	option: string[],
+	selectedOption?: string
+}
 
 class Indecision extends Component {
-	state = {
+	state: IState = {
 		option: [],
 		selectedOption: undefined
 	};
-	componentDidMount() {
+
+	componentDidMount(): void {
 		try {
-			const json = localStorage.getItem('options');
-			const option = JSON.parse(json);
+			const json : string | null= localStorage.getItem('options');
+			const option: Array<string> = JSON.parse(json!);
 			if (option) {
 				this.setState(() => ({ option }));
 			}
@@ -22,42 +28,49 @@ class Indecision extends Component {
 			//do nothing
 		}
 	}
-	componentDidUpdate(prevProps, prevState) {
+
+	componentDidUpdate(prevProps: any, prevState: IState) {
 		if (prevState.option.length !== this.state.option.length) {
 			const json = JSON.stringify(this.state.option);
 			localStorage.setItem('options', json);
 		}
 	}
-	handlePick = () => {
-		let randomNum = Math.floor(Math.random() * this.state.option.length);
-		const ranOption = this.state.option[randomNum];
+
+	handlePick = (): void => {
+		let randomNum: number = Math.floor(Math.random() * this.state.option.length);
+		const ranOption: string = this.state.option[randomNum];
 		this.setState(() => ({
 			selectedOption: ranOption
 		}));
 	};
-	handleRemoveOption = (optionToRemove) => {
-		this.setState((prevValue) => ({
+
+	handleRemoveOption = (optionToRemove: string) => {
+		this.setState((prevValue: IState) => ({
 			option: prevValue.option.filter((option) => optionToRemove !== option)
 		}));
 	};
-	handleDeleteOption = () => {
+
+	handleDeleteOption = (): void => {
 		this.setState(() => ({ option: [] }));
 	};
-	handleAddOption = (option) => {
+
+	handleAddOption = (option: string) => {
 		if (!option) {
 			return 'Enter valid value to add item';
 		} else if (this.state.option.indexOf(option) > -1) {
 			return 'This option already exists';
 		}
-		this.setState((prevValue) => ({ option: [ ...prevValue.option, option ] }));
+		this.setState((prevValue: IState) => ({ option: [...prevValue.option, option] }));
 	};
-	handleOkay = () => {
+
+	handleOkay = (): void => {
 		this.setState(() => ({
 			selectedOption: undefined
 		}));
 	};
-	render() {
-		const subtitle = 'Put your life in the hands of computer.';
+
+	render(): JSX.Element {
+		const subtitle: string = 'Put your life in the hands of computer.';
 		return (
 			<div className="App">
 				<Header subtitle={subtitle} />

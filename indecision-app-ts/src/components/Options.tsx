@@ -1,7 +1,13 @@
 import React from 'react';
 import Option from './Option';
 
-const Options = (props) => (
+interface IProps {
+	handleDeleteOption: () => void,
+	handleRemoveOption: (optionToRemove: string) => void,
+	options: string[]
+}
+
+const Options = (props: IProps): JSX.Element => (
 	<div>
 		<div className="widget-header">
 			<h3 className="widget-header__title">Your Options</h3>

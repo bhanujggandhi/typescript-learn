@@ -1,19 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-class AddOption extends Component {
-	state = {
+interface IState {
+	error?: string
+}
+
+interface IProps {
+	handleAddOption: (option: string) => string | undefined
+}
+
+class AddOption extends Component<IProps, IState> {
+	state: IState = {
 		error: undefined
 	}
-	handleAddOption = (event) => {
+	handleAddOption = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		const newValue = event.target.elements.option.value.trim();
+		const target: any = event.target;
+		const value: string = target.elements.option.value;
+		const newValue: string = value.trim();
 		const error = this.props.handleAddOption(newValue);
 		this.setState(() => ({ error }));
 		if (!error) {
-			event.target.elements.option.value = '';
+			target.elements.option.value = '';
 		}
 	};
-	render() {
+	render(): JSX.Element {
 		return (
 			<div>
 				{this.state.error && <p className="add-option-error">{this.state.error}</p>}
